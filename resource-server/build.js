@@ -5,7 +5,7 @@ const { copy } = require('esbuild-plugin-copy');
 
 esbuild
   .build({
-    entryPoints: ['src/app.ts'],
+    entryPoints: ['api/index.ts'],
     bundle: true,
     platform: 'node',
     target: 'node20', // or your target environment

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node build.js",
-    "express:server": "yarn build && node dist/app.js"
+    "express:server": "yarn build && node dist/index.js"
   },
   "dependencies": {
     "esbuild-plugin-copy": "^2.1.1",
