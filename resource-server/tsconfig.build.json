@@ -1,0 +1,17 @@
+{
+    "extends": "./tsconfig.json",
+    "include": ["src/**/*", "../common/src/**/*"],
+    "exclude": [
+      "node_modules/**/*",
+      ".vscode/**/*",
+      "test/**/*",
+      "scripts/**/*",
+    ],
+    "scripts": {
+      "build": "STAGE=${STAGE:-dev} node build.js",
+      "lint-nofix": "tsc --noEmit && eslint --max-warnings 0",
+      "lint": "yarn lint-nofix && yarn pretty",
+      "lint:fix": "yarn lint-nofix --fix && yarn pretty --write",
+    }
+  }
+  
