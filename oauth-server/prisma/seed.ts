@@ -2,7 +2,7 @@ import prisma from '../src/lib/prisma'
 
 async function main() {
   const response = await Promise.all([
-    prisma.customers.upsert({
+    prisma.Client.upsert({
       where: { name: 'Customer 1' },
       update: {},
       create: {
@@ -15,7 +15,7 @@ async function main() {
           'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMUAAAEACAMAAAA0tEJxAAAAb1BMVEX///8AAADNzc1gYGBBQUH8/PwdHR2/v7/Hx8eqqqr4+Pijo6P19fXV1dXY2Njy8vLn5+fh4eHs7OyEhIQMDAx9fX2Li4uamppnZ2c0NDS6urqkpKRvb2/l5eUpKSlVVVVMTEw7OzssLCyUlJRHR0eNMZJmAAADCklEQVR4nO3di1LaQBiG4SV2Cw3ZUxRiKdSi3v81doPMYC2HgGK+OO87gpJhnP9hDTjRIcYQERERERERERERERER0fuz+bKY7mpi3xOdXzZU09+j1xV9z3RB6Xb0puEo7MuncvHw1jA0hXXLu/8NQ1IYW9x+30cYhsK2q1AulgcEA1Hk3bnZsy8MSlEuZnt3hUEoXp6RivmfkwJlhSld862TQE6xfUkw9fhp3Vkgp8hVrtn/kjAQRfCT5v58QK8Ku/sypMl0fn/oBU1ZYU0ZYho385v179NDqiqMffyA4ftXvOsnCAUKFChQoECBAgUKFChQoECBAsUnKj4S0d9x2snpip/yii51/gMGiquHQicUOqHQCYVOKHRCoRMKnVDohEInFDqh0AmFTih0QqETCp1Q6IRCJxQ6odAJhU4odEKhEwqdUOiEQicUOqHQCYVOKHRCoRMKnVDohEInFDqh0AmFTih0QqETCp1Q6IRCJxQ6odAJhU4odEKhEwqdUOiEQicUOn0NxbqrYtL3pMfq/K6Ji74nPVbns6786HvSY3U+8c2vvic9UuiKGD31PeqRYmfFvO9RjzTurFj2PeqRnjor1n2PejBrup1bb1PZ97QH890Rwk9SZyyF6GJYa+bnIEYP5p/zxIlUHjtx6b6eazlG3VzwRuEz99ljWjve36KZLZ/PF2x7XM6mi73fdnUdxsWTXtZ1nsQ+9r3lT3ed33pRoECBAgUKFChQoECBAgUKFChOKO6+hOL+5jN7GF8FIXZIlYiIiIiIiIiIiIg+Ltv+X619cyR4cMeFyxDydVXubltTt7AQ7Ot7VdKyUNTO2lC1i5LaK2eNz7fsJBRmY2vHD67eLNf2YrdrKFPpau9WPkxqbydlcrao0yo4XxXBpRhXfpVc6aL3lUvWudL4OqXa+1URU9+z76rawUzMD7w3rkxF5YzLU1a2yGsSfV2HlJ3WpyyMebMpTP4oUr6f73v2XSHP4m2sfelfHua8EimkuNke82qEzTaftyWTYhljrOOqTsFXQgpq+wthNkUm2RfOcQAAAABJRU5ErkJggg==',
       },
     }),
-    prisma.customers.upsert({
+    prisma.Client.upsert({
         where: { name: 'Customer 2' },
         update: {},
         create: {
