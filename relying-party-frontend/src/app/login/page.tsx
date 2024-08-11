@@ -4,8 +4,8 @@ import config from '../config';
 
 export default function Login() {
     const doLogin = (provider: string) => {
-        const authServerEndpoint = process.env.AUTH_SERVER_ENDPOINT || config.authServerEndpoint;
-        const authClientId = process.env.AUTH_CLIENT_ID || config.clientId;
+        const authServerEndpoint = process.env.NEXT_PUBLIC_AUTH_SERVER_ENDPOINT || config.authServerEndpoint;
+        const authClientId = process.env.NEXT_PUBLIC_AUTH_CLIENT_ID || config.clientId;
         const url = new URL(authServerEndpoint);
         url.searchParams.append('provider', provider);
         url.searchParams.append('client_id', authClientId);
