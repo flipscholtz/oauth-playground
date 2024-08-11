@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default async function Table() {
   const startTime = Date.now()
-  const clients = await prisma.Client.findMany()
+  const clients = await prisma.client.findMany()
   const duration = Date.now() - startTime
 
   return (
