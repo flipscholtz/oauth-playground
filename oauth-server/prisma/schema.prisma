@@ -28,5 +28,7 @@ model Session {
   client Client @relation(fields: [clientId], references: [id])
   clientId Int
   createdAt DateTime @default(now())
+  provider String
+  redirectUri String
   authorizationCode String?
 }

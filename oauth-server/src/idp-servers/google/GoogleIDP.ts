@@ -4,7 +4,7 @@ import googleConfig from "./config";
 import appConfig from "../../app/config";
 
 export class GoogleIDP implements IDPInterface {
-    getAuthUrl(): string {
+    getAuthUrl(sessionId: string): string {
         const redirectEndpoint = process.env.OAUTH_SERVER_REDIRECT_ENDPOINT || appConfig.OAUTH_SERVER_REDIRECT_ENDPOINT;
         const googleClientId =  process.env.GOOGLE_CLIENT_ID || googleConfig.googleClientId;
         const url = new URL(googleConfig.googleOauthEndpoint);
@@ -12,6 +12,8 @@ export class GoogleIDP implements IDPInterface {
         url.searchParams.append('redirect_uri', redirectEndpoint);
         url.searchParams.append('response_type', 'code');
         url.searchParams.append('scope', 'https://www.googleapis.com/auth/userinfo.email');
+        // So we can look up the session details when we receive the callback.
+        url.searchParams.append('state', sessionId);
         return url.toString();
     }
 
