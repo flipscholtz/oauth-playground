@@ -4,9 +4,11 @@ import config from '../config';
 
 export default function Login() {
     const doLogin = (provider: string) => {
-        const url = new URL(config.authServerEndpoint);
+        const authServerEndpoint = process.env.AUTH_SERVER_ENDPOINT || config.authServerEndpoint;
+        const authClientId = process.env.AUTH_CLIENT_ID || config.clientId;
+        const url = new URL(authServerEndpoint);
         url.searchParams.append('provider', provider);
-        url.searchParams.append('client_id', config.clientId);
+        url.searchParams.append('client_id', authClientId);
         window.open(url.toString(), "_blank", "width=500,height=600");
     }
     return (
