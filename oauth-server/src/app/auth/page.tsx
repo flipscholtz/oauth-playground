@@ -18,8 +18,8 @@ export default function Auth() {
     return (
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="w-full">
-            <h3>Auth Page</h3>
-            <p>Log in with {provider}</p>
+          <h3>Auth Page</h3>
+          <p>Log in with {provider}</p>
         </div>
       </main>
     );
