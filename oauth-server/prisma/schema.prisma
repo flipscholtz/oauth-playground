@@ -11,13 +11,22 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model customers {
+model Client {
   id        Int      @id @default(autoincrement())
   name      String @unique
   clientId  String @unique
   clientSecret String
   jwtSecretKeyPem String
-  allowedRedirectEndpoints String
+  allowedRedirectEndpoints String // comma-delimited
   logo     String
+  sessions Session[]
   createdAt DateTime @default(now())
+}
+
+model Session {
+  id  String @unique
+  client Client @relation(fields: [clientId], references: [id])
+  clientId Int
+  createdAt DateTime @default(now())
+  authorizationCode String?
 }

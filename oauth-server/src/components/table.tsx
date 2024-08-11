@@ -12,7 +12,7 @@ export default async function Table() {
         <div className="space-y-1">
           <h2 className="text-xl font-semibold">Customers</h2>
           <p className="text-sm text-gray-500">
-            Fetched {customers.length} users in {duration}ms
+            Fetched {customers.length} customers in {duration}ms
           </p>
         </div>
       </div>
