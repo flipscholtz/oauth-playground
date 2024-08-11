@@ -7,10 +7,12 @@ export default function Login() {
         const authServerEndpoint = process.env.NEXT_PUBLIC_AUTH_SERVER_ENDPOINT || config.authServerEndpoint;
         const authClientId = process.env.NEXT_PUBLIC_AUTH_CLIENT_ID || config.clientId;
         const redirectUri = process.env.NEXT_PUBLIC_AUTH_REDIRECT_URI || config.redirectUri;
+        const scope = process.env.NEXT_PUBLIC_AUTH_SCOPE || config.scope;
         const authServerUrl = new URL(authServerEndpoint);
         authServerUrl.searchParams.append('provider', provider);
         authServerUrl.searchParams.append('client_id', authClientId);
         authServerUrl.searchParams.append('redirect_uri', redirectUri);
+        authServerUrl.searchParams.append('scope', scope);
         window.open(authServerUrl.toString(), "_blank", "width=500,height=600");
     }
     return (

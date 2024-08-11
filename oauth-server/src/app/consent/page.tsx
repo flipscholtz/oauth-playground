@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
-import { getSessionDetails } from "../utils";
+import { getSessionDetails, setSessionStatus } from "../utils";
 
 export default async function Consent() {
     try {
@@ -16,7 +16,8 @@ export default async function Consent() {
             redirect(redirectUrl.toString(), RedirectType.replace);
          };
 
-         const handleDeny = () => {
+         const handleDeny = async () => {
+            await setSessionStatus(session.id, 'consent-refused');
             return <h1>Operation cancelled!</h1>;
          };
 
