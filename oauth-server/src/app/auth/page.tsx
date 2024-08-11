@@ -10,6 +10,7 @@ export default async function Auth() {
   const url = new URL(headerList.get("x-current-url") || "");
   const provider = url.searchParams.get('provider');
   const clientId = url.searchParams.get('client_id');
+  const scope = url.searchParams.get('scope');
 
   // Validate the client ID:
   if(!clientId) {
@@ -24,6 +25,12 @@ export default async function Auth() {
   if(!client) {
     return <h1>Error: Invalid client_id</h1>
   }
+
+  // Validate the scope:
+  if(!scope) {
+    return <h1>Error: Missing scope</h1>
+  }
+
 
   // Validate the provider:
   let idp: IDPInterface;
@@ -45,6 +52,9 @@ export default async function Auth() {
       // Use the first one configured for the client.
       redirectUri = redirectAllowlist[0];
     }
+    if(!redirectAllowlist.includes(redirectUri)) {
+      return <h1>Error: redirect_uri mismatch</h1>;
+    }
 
     // Create a new session in the DB:
     const sessionId = uuid();
@@ -54,9 +64,10 @@ export default async function Auth() {
         provider,
         clientId: client.id,
         redirectUri,
+        scope,
+        status: 'awaiting-provider-auth'
       }
     });
-
 
     // Redirect to the IDP auth site, passing the session ID as the state parameter
     redirect(idp.getAuthUrl(sessionId), RedirectType.replace);

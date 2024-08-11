@@ -29,6 +29,8 @@ model Session {
   clientId Int
   createdAt DateTime @default(now())
   provider String
+  scope String
   redirectUri String
+  status String
   authorizationCode String?
 }
