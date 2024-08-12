@@ -17,10 +17,10 @@ Auth middleware checks for a JWT signed by `config.publicPEM` and with a `scopes
 
 ### oauth-server
 Combines:
-a. A Postgres DB (Vercel postgres with prisma) for Client and Session data.
-b. An /auth endpoint to start the OAuth2 flow. Includes UI for prompting the user for consent. Results in a redirect back to `redirect_uri` with the authorization code
-c. A /token endpoint to exchange the auth code for a JWT.
-d. An IDP interface handling the behind-the-scenes integration with identity providers
+- A Postgres DB (Vercel postgres with prisma) for Client and Session data.
+- An /auth endpoint to start the OAuth2 flow. Includes UI for prompting the user for consent. Results in a redirect back to `redirect_uri` with the authorization code
+- A /token endpoint to exchange the auth code for a JWT.
+- An IDP interface handling the behind-the-scenes integration with identity providers
     - Google (currently implemented)
         Client ID in `google/config.googleClientId` . Client secret in `process.env.GOOGLE_OAUTH_CLIENT_SECRET`. Current clientId is from my personal account.
     - TODO: Basic auth (simple db of username / password)
