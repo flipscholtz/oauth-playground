@@ -36,8 +36,11 @@ export class GoogleIDP implements IDPInterface {
             tokenUrl.searchParams.append('redirect_uri', redirectEndpoint);
             const response = await axios.post(tokenUrl.toString());
             console.log('Google token response', response);
-            // Access token is valid if it returns a user_id on verification
-            return !!response.data;
+            // Pass as long as we have an access_token
+            // We don't need any data from Google at the moment, so we're not using this access token for anything.
+            // We just wanted to know that the user has a valid Google account.
+            // We could fetch the user's profile info here and store it in our user db.
+            return !!response.data.access_token;
         } catch(err) {
             console.error('Could not verify auth code with Google', err);
             return false;

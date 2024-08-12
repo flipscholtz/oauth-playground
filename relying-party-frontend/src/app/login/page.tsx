@@ -38,7 +38,7 @@ export default function Login() {
         <div className="w-full">
           <p>Log in with:</p>
           <button onClick={() => doLogin('google')}>Google</button><br/>
-          <button onClick={() => doLogin('password')}>Username / Password</button>
+          <button onClick={() => doLogin('password')} disabled={true}>Username / Password (not implemented yet)</button>
         </div>
       </main>
     );
