@@ -1292,8 +1292,8 @@ var require_node = __commonJS({
           }
           break;
         case "FILE":
-          var fs = require("fs");
-          stream2 = new fs.SyncWriteStream(fd2, { autoClose: false });
+          var fs2 = require("fs");
+          stream2 = new fs2.SyncWriteStream(fd2, { autoClose: false });
           stream2._type = "fs";
           break;
         case "PIPE":
@@ -17232,8 +17232,8 @@ var require_node2 = __commonJS({
           }
           break;
         case "FILE":
-          var fs = require("fs");
-          stream2 = new fs.SyncWriteStream(fd2, { autoClose: false });
+          var fs2 = require("fs");
+          stream2 = new fs2.SyncWriteStream(fd2, { autoClose: false });
           stream2._type = "fs";
           break;
         case "PIPE":
@@ -17946,8 +17946,8 @@ var require_node3 = __commonJS({
           }
           break;
         case "FILE":
-          var fs = require("fs");
-          stream2 = new fs.SyncWriteStream(fd2, { autoClose: false });
+          var fs2 = require("fs");
+          stream2 = new fs2.SyncWriteStream(fd2, { autoClose: false });
           stream2._type = "fs";
           break;
         case "PIPE":
@@ -18812,7 +18812,7 @@ var require_view = __commonJS({
     "use strict";
     var debug = require_src3()("express:view");
     var path = require("path");
-    var fs = require("fs");
+    var fs2 = require("fs");
     var dirname = path.dirname;
     var basename = path.basename;
     var extname = path.extname;
@@ -18878,7 +18878,7 @@ var require_view = __commonJS({
     function tryStat(path2) {
       debug('stat "%s"', path2);
       try {
-        return fs.statSync(path2);
+        return fs2.statSync(path2);
       } catch (e) {
         return void 0;
       }
@@ -19488,8 +19488,8 @@ var require_node4 = __commonJS({
           }
           break;
         case "FILE":
-          var fs = require("fs");
-          stream2 = new fs.SyncWriteStream(fd2, { autoClose: false });
+          var fs2 = require("fs");
+          stream2 = new fs2.SyncWriteStream(fd2, { autoClose: false });
           stream2._type = "fs";
           break;
         case "PIPE":
@@ -19664,7 +19664,7 @@ var require_mime = __commonJS({
   "node_modules/mime/mime.js"(exports2, module2) {
     "use strict";
     var path = require("path");
-    var fs = require("fs");
+    var fs2 = require("fs");
     function Mime() {
       this.types = /* @__PURE__ */ Object.create(null);
       this.extensions = /* @__PURE__ */ Object.create(null);
@@ -19685,7 +19685,7 @@ var require_mime = __commonJS({
     };
     Mime.prototype.load = function(file) {
       this._loading = file;
-      var map = {}, content = fs.readFileSync(file, "ascii"), lines = content.split(/[\r\n]+/);
+      var map = {}, content = fs2.readFileSync(file, "ascii"), lines = content.split(/[\r\n]+/);
       lines.forEach(function(line) {
         var fields = line.replace(/\s*#.*|^\s*|\s*$/g, "").split(/\s+/);
         map[fields.shift()] = fields;
@@ -19924,7 +19924,7 @@ var require_send = __commonJS({
     var escapeHtml = require_escape_html();
     var etag = require_etag();
     var fresh = require_fresh();
-    var fs = require("fs");
+    var fs2 = require("fs");
     var mime = require_mime();
     var ms = require_ms5();
     var onFinished = require_on_finished();
@@ -20257,7 +20257,7 @@ var require_send = __commonJS({
       var i = 0;
       var self = this;
       debug('stat "%s"', path2);
-      fs.stat(path2, function onstat(err, stat) {
+      fs2.stat(path2, function onstat(err, stat) {
         if (err && err.code === "ENOENT" && !extname(path2) && path2[path2.length - 1] !== sep) {
           return next(err);
         }
@@ -20272,7 +20272,7 @@ var require_send = __commonJS({
         }
         var p = path2 + "." + self._extensions[i++];
         debug('stat "%s"', p);
-        fs.stat(p, function(err2, stat) {
+        fs2.stat(p, function(err2, stat) {
           if (err2) return next(err2);
           if (stat.isDirectory()) return next();
           self.emit("file", p, stat);
@@ -20290,7 +20290,7 @@ var require_send = __commonJS({
         }
         var p = join(path2, self._index[i]);
         debug('stat "%s"', p);
-        fs.stat(p, function(err2, stat) {
+        fs2.stat(p, function(err2, stat) {
           if (err2) return next(err2);
           if (stat.isDirectory()) return next();
           self.emit("file", p, stat);
@@ -20302,7 +20302,7 @@ var require_send = __commonJS({
     SendStream.prototype.stream = function stream(path2, options) {
       var self = this;
       var res = this.res;
-      var stream2 = fs.createReadStream(path2, options);
+      var stream2 = fs2.createReadStream(path2, options);
       this.emit("stream", stream2);
       stream2.pipe(res);
       function cleanup() {
@@ -27073,7 +27073,7 @@ var ErrorWithStatus = class extends Error {
 var config_default = {
   jwt: {
     algorithm: "RS256",
-    publicPEM: "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAETMOuxYLKcLFv1qLDa0eTct/4Z6QX\nx1K877RTQQsrpfK70X90AH1NlOmJyaVJG+XHFNjQXIj9/nz6ilRz4Xo15g==\n-----END PUBLIC KEY-----"
+    publicPEM: "-----BEGIN RSA PUBLIC KEY-----\nMIICCgKCAgEAsq2/1z+RGi6oVUyEDC3IVeOoghv8AwllBq2UK7Vp+xfZA/b0gBmk\nOCmC7dMAy27oloTOXo9ERV64w/hcKTcikzGzpkZ4zMRRLoCYXKSUoqMcl7DNlUz9\nZ89VF7oZTTCJRKfCnZ89Edb9AZ89SeLLDdHqTM5m0zxC4q1bHOHC9X1yQOcuHg46\nZlgqSXzZT6s3tcAcUQ2TR7frYC7GTIZFkzc2/8jA5hABonyx2Jn3u0aasZrTD+Ju\nHKxN+91owxdv1g7hNBu9zyAO57ovxQSDcPltldQuiVUM1DnsCL6QwBEn1KyhTrJf\nzYx0Xzhn+CjP1N1nhbnBZQDEwMJBnsIlOogdOLUWA7GJ4/eoLV8qm/mP2HG3oQRX\nsHl5ndLe73vWfi4OrZte5NQ4gdDRTIBB7XKOqvXav2UDkmq/Chhz1dIy8at/LcpB\nQTdQyQbnhjLebXE/ULrqwEhJqSifhIDsRKPARuN6bChID8tjFEvUYkPwBJ9IoM4s\nBIBffLWnuGtFdlwlKT3Q+9TozT1enPUak+b6MKZsMZhTJy33GBonN04LnvPBIYSl\nwlQvUADGUPOTRjbNqHPZ3fC6Uath6PoKs7Cc8qOKKoj10b2f3w7eYPbSOJJ8DynA\ndoLN80JB3nxkjtDo1HwlifI1oBm2gSUioJu8/vD/NXAi6tpkRruRJk8CAwEAAQ==\n-----END RSA PUBLIC KEY-----"
   }
 };
 
@@ -27083,9 +27083,9 @@ var authMiddleware = async (req, res, next) => {
   if (req.method === "OPTIONS") {
     return next();
   }
-  const authError = () => {
-    const err = new ErrorWithStatus("Unauthorized", 401);
-    return next(err);
+  const authError = (message = "Unauthorized") => {
+    const err = new ErrorWithStatus(message, 401);
+    res.status(err.status || 500).send({ error: err.message });
   };
   const authHeader = req.headers.authorization;
   if (!authHeader) {
@@ -27101,6 +27101,9 @@ var authMiddleware = async (req, res, next) => {
     if (!decodedJwt) {
       return authError();
     }
+    if (!decodedJwt.scopes.includes("view-cat-pic")) {
+      return authError("Missing view-cat-pic scope");
+    }
     res.locals.decodedJwt = decodedJwt;
     return next();
   } catch (err) {
@@ -27110,13 +27113,15 @@ var authMiddleware = async (req, res, next) => {
 var authMiddleware_default = authMiddleware;
 
 // src/api.ts
+var fs = __toESM(require("fs"));
 var router = import_express.default.Router();
 router.get(
   "/catpic",
   [authMiddleware_default],
   async (_req, res, next) => {
     try {
-      res.sendFile(__dirname + "/assets/catpic.jpg");
+      const data = fs.readFileSync(__dirname + "/assets/catpic.jpg");
+      res.send({ image: Buffer.from(data.buffer).toString("base64") });
     } catch (error) {
       const status = error.status || 500;
       const message = error.message || "Failed to process request";
@@ -27131,14 +27136,16 @@ var api_default = router;
 // api/index.ts
 var app = (0, import_express2.default)();
 app.use(function(_req, res, next) {
+  console.log("IN AUTH MIDDLEWARE");
   res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, OPTIONS"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
+    "X-Requested-With,content-type,Authorization"
   );
   next();
 });

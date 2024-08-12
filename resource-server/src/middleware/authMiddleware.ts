@@ -16,9 +16,9 @@ const authMiddleware: RequestHandler = async (
     return next();
   }
 
-  const authError = () => {
-    const err = new ErrorWithStatus('Unauthorized', 401);
-    return next(err);
+  const authError = (message: string = 'Unauthorized') => {
+    const err = new ErrorWithStatus(message, 401);
+    res.status(err.status || 500).send({error: err.message});
   };
 
   const authHeader = req.headers.authorization;
@@ -36,6 +36,9 @@ const authMiddleware: RequestHandler = async (
     const decodedJwt = decodeJwt(tokenValue);
     if (!decodedJwt) {
       return authError();
+    }
+    if(!decodedJwt.scopes.includes('view-cat-pic')) {
+      return authError('Missing view-cat-pic scope');
     }
     res.locals.decodedJwt = decodedJwt;
     return next();

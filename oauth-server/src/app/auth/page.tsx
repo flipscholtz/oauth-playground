@@ -11,6 +11,9 @@ export default async function Auth() {
   const provider = url.searchParams.get('provider');
   const clientId = url.searchParams.get('client_id');
   const scope = url.searchParams.get('scope');
+  const grantType = url.searchParams.get('grant_type');
+  const codeChallenge = url.searchParams.get('code_challenge');
+  const codeChallengeMethod = url.searchParams.get('code_challenge_method');
 
   // Validate the client ID:
   if(!clientId) {
@@ -29,6 +32,16 @@ export default async function Auth() {
   // Validate the scope:
   if(!scope) {
     return <h1>Error: Missing scope</h1>
+  }
+
+  // TODO: Support other grant types
+  if(grantType !== 'authorization_code') {
+    return <h1>Error: Unsupported grant type</h1>
+  }
+
+  // TODO: Support other challenge methods and perhaps make PKCE optional.
+  if(!codeChallenge || codeChallengeMethod !== 'S256') {
+    return <h1>Please send a code challenge generated using the S256 method.</h1>
   }
 
 
@@ -65,6 +78,9 @@ export default async function Auth() {
         clientId: client.id,
         redirectUri,
         scope,
+        grantType,
+        codeChallenge,
+        codeChallengeMethod,
         status: 'awaiting-provider-auth'
       }
     });

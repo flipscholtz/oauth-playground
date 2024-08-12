@@ -32,5 +32,9 @@ model Session {
   scope String
   redirectUri String
   status String
+  grantType String
   authorizationCode String?
+  authCodeCreatedAt DateTime?
+  codeChallenge String?
+  codeChallengeMethod String?
 }

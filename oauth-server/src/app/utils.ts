@@ -9,7 +9,11 @@ export type Session = {
     scope: string;
     redirectUri: string;
     status: SessionStatus;
+    grantType: 'authorization_code';
     authorizationCode: string | null;
+    authCodeCreatedAt: Date | null;
+    codeChallenge?: string;
+    codeChallengeMethod?: string;
 };
 
 export type Client = {
@@ -23,7 +27,7 @@ export type Client = {
         createdAt: Date;
 };
 
-export type SessionStatus = 'awaiting-provider-auth' | 'provider-auth-failed' | 'awaiting-consent' | 'consent-granted' | 'consent-refused' | 'token_issued';
+export type SessionStatus = 'awaiting-provider-auth' | 'provider-auth-failed' | 'awaiting-consent' | 'consent-granted' | 'consent-refused' | 'grant_issued';
 
 export const getSessionDetails = async (url: string): Promise<Session> => {
     const parsedUrl = new URL(url);
@@ -42,9 +46,33 @@ export const getSessionDetails = async (url: string): Promise<Session> => {
     }
     return {
         ...session,
-        status: session.status as SessionStatus,
         client,
-    };
+    } as Session;
+}
+
+export const getSessionByAuthCode = async (authorizationCode?: string | null): Promise<Session> => {
+    if(!authorizationCode) {
+        throw new Error('Missing auth code');
+    }
+    const session = await prisma.session.findFirst({
+        where: {
+            authorizationCode
+        }
+     });
+     if(!session) {
+        throw new Error('Invalid auth code');
+     }
+     if(session.status !== 'grant_issued') {
+        throw new Error('Invalid session status');
+     }
+     const client = await prisma.client.findFirst({where: { id: session.clientId }});
+    if(!client) {
+        throw new Error('Invalid client in session');
+    }
+    return {
+        ...session,
+        client,
+    } as Session;
 }
 
 export const setSessionStatus = async (sessionId: string, status: SessionStatus): Promise<void> => {
