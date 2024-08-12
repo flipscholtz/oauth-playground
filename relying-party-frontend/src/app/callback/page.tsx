@@ -6,17 +6,17 @@ import { useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
 
 export default function Callback() {
-    const searchParams = useSearchParams();
-    const authCode = searchParams.get('code');
-    if(!authCode) {
-        return (<h1>Error: No auth code in callback uri</h1>);
-    }
-
     // Artificial delay to test auth code expiry
     const [exchangeDelayRemaining, setExchangeDelayRemaining] = useState<number>(config.tokenExchangeDelaySeconds);
     const [accessToken, setAccessToken] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [imageData, setImageData] = useState<string | null>(null);
+
+    const searchParams = useSearchParams();
+    const authCode = searchParams.get('code');
+    if(!authCode) {
+      setError('No auth code in callback uri');
+    }
 
     const doTokenExchange = async (authCode: string): Promise<string | null> => {
       const authServerEndpoint = process.env.NEXT_PUBLIC_AUTH_SERVER_ENDPOINT || config.authServerEndpoint;
@@ -37,7 +37,9 @@ export default function Callback() {
     useEffect(() => {
       if(exchangeDelayRemaining <= 0){
         // Do code exchange here.
-        doTokenExchange(authCode).then(setAccessToken);
+        if(!!authCode){
+          doTokenExchange(authCode).then(setAccessToken);
+        }
         return;
       }
 
