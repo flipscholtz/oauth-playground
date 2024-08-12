@@ -44,7 +44,7 @@ export default function Callback() {
       }
 
       setTimeout(() => setExchangeDelayRemaining((prev) => prev - 1), 1000);
-    }, [exchangeDelayRemaining]);
+    }, [exchangeDelayRemaining, authCode]);
 
     useEffect(() => {
       if(!accessToken) {
