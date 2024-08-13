@@ -30,7 +30,7 @@ Combines:
 - Clicking "Log in with Google" initiates the oauth flow. 
 - When the OAuth server redirects back to `/callback` with the auth code, the token exchange is done followed by the resource request.
 - Session expiry can be simulated by setting `config.tokenExchangeDelaySeconds` > 10 seconds (see `MAX_AUTH_CODE_AGE_SECONDS` in oauth-server)
-- Invalid PKCE code_verifier can be simulates by setting `config.sendInvalidCodeVerifier: true`
+- Invalid PKCE code_verifier can be simulated by setting `config.sendInvalidCodeVerifier: true`
 
 ## Testing on Vercel (already deployed)
 Visit https://relying-party-frontend.vercel.app/login and proceed to log in with Google.
